@@ -471,19 +471,38 @@ def main(window):
     pygame.quit()
 
 
+def draw_text_middle(text, size, color, surface):
+    # This function should render text at the center of the screen
+    font = pygame.font.Font(None, size)
+    text_surface = font.render(text, True, color)
+    text_rect = text_surface.get_rect(center=(surface.get_width() / 2, surface.get_height() / 2))
+    surface.blit(text_surface, text_rect)
+
+def main(window):
+    # Placeholder for the main game or application logic
+    pass
+
 def main_menu(window):
     run = True
     while run:
+        window.fill((0, 0, 0))  # Clear the screen with a black background
         draw_text_middle('Press any key to begin', 50, (255, 255, 255), window)
         pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                pygame.quit()
+                exit()  # Exit the application if the window is closed
             elif event.type == pygame.KEYDOWN:
-                main(window)
+                main(window)  # Start the main application logic
 
-    pygame.quit()
+    pygame.quit()  # Ensure pygame quits when the loop ends
+
+# Example usage:
+# Initialize Pygame and create a window
+pygame.init()
+window = pygame.display.set_mode((800, 600))
+main_menu(window)
 
 
 if __name__ == '__main__':
